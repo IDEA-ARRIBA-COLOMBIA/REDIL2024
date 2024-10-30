@@ -11,6 +11,7 @@ use App\Models\CampoExtraGrupo;
 use App\Models\GrupoExcluido;
 use App\Models\Iglesia;
 use App\Models\IntegranteGrupo;
+use App\Models\ReporteGrupo;
 use App\Models\Sede;
 use App\Models\ServidorGrupo;
 use App\Models\TipoVivienda;
@@ -839,9 +840,10 @@ class GrupoController extends Controller
 
     $dataUltimosReportes = [];
     $serieUltimosReportes= [];
-    $ultimos10Reportes = $grupo->reportes()->orderBy('fecha','desc')->take(10)->select('cantidad_asistencias', 'fecha', 'id')->get();
+    $idsUltimos10Reportes = $grupo->reportes()->orderBy('fecha','desc')->orderBy('fecha','asc')->take(10)->select('id')->pluck('id')->toArray();
+    $ultimos10Reportes = ReporteGrupo::whereIn('id',$idsUltimos10Reportes)->select('id','tema','fecha','cantidad_asistencias')->get();
 
-    $meses = Helpers::meses('cortos');
+    $meses = Helpers::meses('corto');
 
     foreach($ultimos10Reportes as $reporte)
     {
@@ -909,7 +911,8 @@ class GrupoController extends Controller
       'serieUltimosReportes' => $serieUltimosReportes,
       'serieUltimosMeses' => $serieUltimosMeses,
       'dataUltimosMeses' => $dataUltimosMeses,
-      'camposExtras' => $camposExtras
+      'camposExtras' => $camposExtras,
+      'ultimos10Reportes' => $ultimos10Reportes
     ]);
   }
 

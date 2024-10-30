@@ -82,7 +82,7 @@ class ReporteGrupoSeeder extends Seeder
 
         $reporte = ReporteGrupo::create([
           'grupo_id' => 4,
-          'fecha' => '2024-02-21',
+          'fecha' => '2024-02-26',
           'cantidad_asistencias' => rand(5, 15),
           'tema' => 'El evangelio 3'
         ]);

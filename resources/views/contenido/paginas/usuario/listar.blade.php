@@ -360,7 +360,7 @@ $configData = Helper::appClasses();
               @if(isset($persona->tipoUsuario->id))
                 <div class="d-flex align-items-center justify-content-center my-2 gap-2">
                   @if($persona->tipoUsuario->seguimiento_actividad_grupo==FALSE)
-                    <span class="badge bg-label-secondary">No seguimiento grupos</span>
+                    <span class="badge bg-label-secondary">No seguimiento en grupos</span>
                   @else
                     @if($persona->estadoActividadGrupos())
                     <span class="badge bg-label-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Último reporte {{$persona->ultimo_reporte_grupo}}">Activo grupo</span>

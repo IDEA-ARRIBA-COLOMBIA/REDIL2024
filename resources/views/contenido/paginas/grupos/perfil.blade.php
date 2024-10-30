@@ -69,7 +69,7 @@ $configData = Helper::appClasses();
     serieReporesReunion = JSON.parse(<?php print json_encode(json_encode($serieUltimosReportes)); ?>),
     graficoUltimosReportesConfig = {
       chart: {
-        height: 400,
+        height: 300,
         type: 'area',
         parentHeightOffset: 0,
         toolbar: {
@@ -176,7 +176,7 @@ $configData = Helper::appClasses();
       colors: [chartColors.donut.series4],
       chart: {
         type: 'bar',
-        height: 400,
+        height: 300,
         toolbar: {
           show: false
         }
@@ -280,34 +280,34 @@ $configData = Helper::appClasses();
 
   <div id="div-principal" class="row">
 
-    <div class="col-12">
-
+    <div class="col-12 mb-3">
+      <!-- mapa -->
+      @if( $grupo->latitud )
+      <iframe width="100%" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q={{$grupo->latitud}},{{$grupo->longitud}}&hl=es&z=14&amp;output=embed">
+      </iframe>
+      @else
+        <div class="py-5 border rounded">
+          <center>
+            <i class="ti ti-brand-google-maps ti-xl pb-1"></i>
+            <h6 class="text-center">¡Ups! no se puede mostrar el mapa debido a que no se ha asignado la georrefencia.</h6>
+            @if($rolActivo->hasPermissionTo('grupos.pestana_georreferencia_grupo'))
+            <a href="{{ route('grupo.georreferencia',$grupo) }}" target="_blank" class="btn btn-primary pendiente" data-bs-toggle="tooltip" aria-label="Agregar georeferencia" data-bs-original-title="Este grupo no está ubicado en el mapa, por favor agrega la ubicación aquí">
+              <i class="ti ti-map-pin-plus me-2 ti-sm"></i> Agregar georreferencia
+            </a>
+            @endif
+          </center>
+        </div>
+      @endif
+      <!-- /mapa -->
     </div>
 
     <div class="col-lg-6 col-md-6">
-      <!-- Georreferencia -->
+      <!-- Información principal -->
       <div class="card mb-4">
         <div class="card-body pb-3">
-          @if( $grupo->latitud )
-          <iframe width="100%" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q={{$grupo->latitud}},{{$grupo->longitud}}&hl=es&z=14&amp;output=embed">
-          </iframe>
-          @else
-            <div class="py-5 border rounded">
-              <center>
-                <i class="ti ti-brand-google-maps ti-xl pb-1"></i>
-                <h6 class="text-center">¡Ups! no se puede mostrar el mapa debido a que no se ha asignado la georrefencia.</h6>
-                @if($rolActivo->hasPermissionTo('grupos.pestana_georreferencia_grupo'))
-                <a href="{{ route('grupo.georreferencia',$grupo) }}" target="_blank" class="btn btn-primary pendiente" data-bs-toggle="tooltip" aria-label="Agregar georeferencia" data-bs-original-title="Este grupo no está ubicado en el mapa, por favor agrega la ubicación aquí">
-                  <i class="ti ti-map-pin-plus me-2 ti-sm"></i> Agregar georreferencia
-                </a>
-                @endif
-              </center>
-            </div>
-          @endif
-
           <div class="row mt-4 mb-4 g-3">
 
-            <div class="col-6">
+            <div class="col-12 col-sm-6">
               <div class="d-flex">
                 <div class="avatar flex-shrink-0 me-3">
                   <span class="avatar-initial rounded bg-label-primary"><i class="ti ti-calendar-event ti-28px"></i></span>
@@ -319,7 +319,7 @@ $configData = Helper::appClasses();
               </div>
             </div>
 
-            <div class="col-6">
+            <div class="col-12 col-sm-6">
               <div class="d-flex">
                 <div class="avatar flex-shrink-0 me-3">
                   <span class="avatar-initial rounded bg-label-primary"><i class="ti ti-clock ti-28px"></i></span>
@@ -331,7 +331,7 @@ $configData = Helper::appClasses();
               </div>
             </div>
 
-            <div class="col-6">
+            <div class="col-12 col-sm-6">
               <div class="d-flex">
                 <div class="avatar flex-shrink-0 me-3">
                   <span class="avatar-initial rounded bg-label-primary"><i class="ti ti ti-user ti-28px"></i></span>
@@ -343,20 +343,21 @@ $configData = Helper::appClasses();
               </div>
             </div>
 
-            <div class="col-6">
+            <div class="col-12 col-sm-6">
               <a href="{{ route('grupo.graficoDelMinisterio', ['idNodo' => 'G-'.$grupo->id]  ) }}" target="_blank" class="" data-bs-toggle="tooltip" aria-label="Ver gráfico ministerial " data-bs-original-title="Ver gráfico ministerial">
                 <div class="d-flex">
                   <div class="avatar flex-shrink-0 me-3">
                     <span class="avatar-initial rounded bg-label-primary"><i class="ti ti-sitemap ti-28px"></i></span>
                   </div>
                   <div>
-                    <small>Ver gráfico<br> ministerial</small>
+                    <small>Gráfico ministerial</small>
+                    <h6 class="mb-0 text-nowrap">Ver gráfico</h6>
                   </div>
                 </div>
               </a>
             </div>
 
-            <div class="col-6">
+            <div class="col-12 col-sm-6">
               <div class="d-flex">
                 <div class="avatar flex-shrink-0 me-3">
                   <span class="avatar-initial rounded bg-label-primary"><i class="ti ti ti-home ti-28px"></i></span>
@@ -368,7 +369,7 @@ $configData = Helper::appClasses();
               </div>
             </div>
 
-            <div class="col-6">
+            <div class="col-12 col-sm-6">
               <div class="d-flex">
                 <div class="avatar flex-shrink-0 me-3">
                   <span class="avatar-initial rounded bg-label-primary"><i class="ti ti-phone ti-28px"></i></span>
@@ -380,7 +381,7 @@ $configData = Helper::appClasses();
               </div>
             </div>
 
-            <div class="col-6">
+            <div class="col-12">
               <div class="d-flex">
                 <div class="avatar flex-shrink-0 me-3">
                   <span class="avatar-initial rounded bg-label-primary"><i class="ti ti-map ti-28px"></i></span>
@@ -407,7 +408,7 @@ $configData = Helper::appClasses();
           </div>
         </div>
       </div>
-      <!-- Georreferencia /-->
+      <!-- Información principal /-->
 
       <!-- Encargados -->
       <div class="card mb-4">
@@ -514,7 +515,7 @@ $configData = Helper::appClasses();
       <!--/ Encargados -->
 
       <!-- Más Información -->
-     <div class="card mb-4">
+      <div class="card mb-4">
         <div class="card-header align-items-center">
           <p class="card-text text-uppercase fw-bold"> Más información </p>
         </div>
@@ -561,36 +562,8 @@ $configData = Helper::appClasses();
       </div>
       <!--/ Más Información -->
 
-
-    </div>
-
-    <div class="col-lg-6 col-md-6">
-      <!-- Grafico de asistencia a reunión -->
-      <div class="card mb-4">
-        <div class="card-header d-flex justify-content-between">
-          <div>
-            <h6 class="card-title text-uppercase mb-0 fw-bold">Gráfico asistencias según reportes</h6>
-            <small class="text-muted">
-              Asistencias de los últimos {{ count($dataUltimosReportes) }} reportes
-            </small>
-          </div>
-        </div>
-        <div class="card-body">
-          <div id="graficoUltimosReportes"></div>
-          @if(count($dataUltimosReportes)>0)
-          <center>
-            <small class="text-muted">
-              Promedio de asistencias: <b> {{ array_sum($dataUltimosReportes)/count($dataUltimosReportes) }}</b>
-            </small>
-          </center>
-          @endif
-
-        </div>
-      </div>
-      <!-- /Grafico de asistencia a reunión -->
-
-      <!-- Grafico de promedios de asistencia  -->
-      <div class="card mb-4">
+       <!-- Grafico de promedios de asistencia  -->
+       <div class="card mb-4">
         <div class="card-header d-flex justify-content-between">
           <div>
             <h6 class="card-title text-uppercase mb-0 fw-bold">Promedios de asistencia mensual</h6>
@@ -605,6 +578,78 @@ $configData = Helper::appClasses();
         </div>
       </div>
       <!-- /Grafico de promedios de asistencia  -->
+    </div>
+
+    <div class="col-lg-6 col-md-6">
+      <!-- Grafico de asistencia a reunión -->
+      <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between">
+          <div>
+            <h6 class="card-title text-uppercase mb-0 fw-bold">Gráfico asistencias según reportes</h6>
+            <small class="text-muted">
+              Asistencias de los últimos {{ count($dataUltimosReportes) }} reportes
+            </small>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          @if(count($dataUltimosReportes)>0)
+          <center>
+            <small class="text-muted">
+              Promedio de asistencias: <b> {{ array_sum($dataUltimosReportes)/count($dataUltimosReportes) }}</b>
+            </small>
+          </center>
+          @endif
+          <div id="graficoUltimosReportes"></div>
+        </div>
+        <div class="card-fooder">
+          <div class="row p-4">
+            <ul class="list-unstyled ">
+              @if($ultimos10Reportes->count() > 0)
+                @foreach($ultimos10Reportes as $reporte)
+                <li class="mb-1 mt-1 p-2 border rounded">
+                  <div class="d-flex align-items-start">
+                  <div class="avatar me-2">
+                          <i class="ti ti-clipboard-data me-2 fs-2"></i>
+                        </div>
+                    <div class="d-flex align-items-start">
+                      <div class="me-2 ms-1">
+                        <h6 class="mb-0">{{ $reporte->tema }}</h6>
+                        <small class=""><i class="ti ti-calendar text-heading fs-6"></i> {{ $reporte->fecha }}</small>
+                        <small class=""><i class="ti ti-users text-heading fs-6"></i> Asistencias:  {{ $reporte->cantidad_asistencias }}</small>
+                      </div>
+                    </div>
+
+                    <div class="ms-auto pt-1 my-auto">
+                      @if($rolActivo->hasPermissionTo('reportes_grupos.opcion_ver_perfil_reporte_grupo'))
+                      <a href="" target="_blank" class="text-body" data-bs-toggle="tooltip" aria-label="Ver perfil" data-bs-original-title="Ver perfil">
+                        <i class="ti ti-user-check me-2 ti-sm"></i></a>
+                      </a>
+                      @endif
+                      <a href="" target="_blank" class="text-body" data-bs-toggle="tooltip" aria-label="Ver perfil" data-bs-original-title="Ver perfil">
+                        <i class="ti ti-corner-down-right me-2 ti-sm"></i></a>
+                      </a>
+                    </div>
+                  </div>
+                </li>
+                @endforeach
+              @else
+                <div class="py-4 border rounded mt-2">
+                  <center>
+                    <i class="ti ti-clipboard-data ti-xl pb-1"></i>
+                    <h6 class="text-center">¡Ups! este grupo aun no tiene reportes.</h6>
+                    @if($rolActivo->hasPermissionTo('grupos.pestana_anadir_lideres_grupo'))
+                    <a href="" target="_blank" class="btn btn-primary pendiente" data-bs-toggle="tooltip" aria-label="Crear reporte" data-bs-original-title="Este grupo no tiene encargados, agrégalos aquí">
+                      <i class="ti ti-clipboard-data me-2 ti-sm"></i> Crear reporte
+                    </a>
+                    @endif
+                  </center>
+                </div>
+              @endif
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- /Grafico de asistencia a reunión -->
     </div>
 
     <div class="col-lg-12 col-md-12">
